@@ -175,65 +175,85 @@
           </p>
 
           <form id="veteran-giveaway" method="POST" action="/.netlify/functions/fcc-giveaway">
-            <!-- Hidden source so the Netlify function / Supabase can tell which site it came from -->
-            <input type="hidden" name="source_site" value="finalsaluteproject.org/nominate">
+  <!-- Hidden source so the Netlify function / Supabase can tell which site it came from -->
+  <input type="hidden" name="source_site" value="finalsaluteproject.org/nominate">
 
+  <div class="form-grid">
+    <div class="field">
+      <label for="fullName">Veteran’s full name<span class="req">*</span></label>
+      <input id="fullName" name="fullName" autocomplete="name" required placeholder="First Last">
+    </div>
 
-            <div class="form-grid">
-              <div class="field">
-                <label for="fullName">Veteran’s full name<span class="req">*</span></label>
-                <input id="fullName" name="fullName" autocomplete="name" required placeholder="First Last">
-              </div>
+    <div class="field">
+      <label for="email">Contact email<span class="req">*</span></label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+        placeholder="name@example.com">
+    </div>
 
-              <div class="field">
-                <label for="email">Contact email<span class="req">*</span></label>
-                <input id="email" name="email" type="email" autocomplete="email" required placeholder="name@example.com">
-              </div>
+    <div class="field">
+      <label for="confirmEmail">Confirm email<span class="req">*</span></label>
+      <input
+        id="confirmEmail"
+        name="confirm_email"
+        type="email"
+        autocomplete="email"
+        required
+        placeholder="Re-enter email">
+    </div>
 
-              <div class="field">
-                <label for="phone">Phone (optional)</label>
-                <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555">
-              </div>
+    <!-- Error message space for email issues -->
+    <p id="emailError" class="error" aria-live="polite" style="color: red; font-weight: 600;"></p>
 
-              <div class="field">
-                <label for="branch">Branch<span class="req">*</span></label>
-                <select id="branch" name="branch" required>
-                  <option value="">Select branch…</option>
-                  <option>U.S. Army</option>
-                  <option>U.S. Marine Corps</option>
-                  <option>U.S. Navy</option>
-                  <option>U.S. Air Force</option>
-                  <option>U.S. Coast Guard</option>
-                </select>
-              </div>
+    <div class="field">
+      <label for="phone">Phone (optional)</label>
+      <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555">
+    </div>
 
-              <div class="field">
-                <label for="years">Years served / rank (optional)</label>
-                <input id="years" name="years" placeholder="e.g., 2009–2017, E-6">
-              </div>
+    <div class="field">
+      <label for="branch">Branch<span class="req">*</span></label>
+      <select id="branch" name="branch" required>
+        <option value="">Select branch…</option>
+        <option>U.S. Army</option>
+        <option>U.S. Marine Corps</option>
+        <option>U.S. Navy</option>
+        <option>U.S. Air Force</option>
+        <option>U.S. Coast Guard</option>
+      </select>
+    </div>
 
-              <div class="field wide">
-                <label for="story">Short story (optional)</label>
-                <textarea id="story" name="story" placeholder="Share a brief service highlight or why this veteran should be honored."></textarea>
-              </div>
+    <div class="field">
+      <label for="years">Years served / rank (optional)</label>
+      <input id="years" name="years" placeholder="e.g., 2009–2017, E-6">
+    </div>
 
-              <div class="field">
-                <label class="check">
-                  <input type="checkbox" id="agree" name="agree" required>
-                  I’m 18+ and agree to the giveaway / nomination rules.<span class="req">*</span>
-                </label>
-              </div>
-            </div>
+    <div class="field wide">
+      <label for="story">Short story (optional)</label>
+      <textarea id="story" name="story" placeholder="Share a brief service highlight or why this veteran should be honored."></textarea>
+    </div>
 
-            <div class="actions">
-              <button class="btn primary" type="submit">Submit Nomination</button>
-              <button class="btn secondary ghost" type="reset">Clear</button>
-            </div>
+    <div class="field">
+      <label class="check">
+        <input type="checkbox" id="agree" name="agree" required>
+        I’m 18+ and agree to the giveaway / nomination rules.<span class="req">*</span>
+      </label>
+    </div>
+  </div>
 
-            <p id="successMsg" style="display:none;">
-              ✅ Entry received! Redirecting…
-            </p>
-          </form>
+  <div class="actions">
+    <button class="btn primary" type="submit">Submit Nomination</button>
+    <button class="btn secondary ghost" type="reset">Clear</button>
+  </div>
+
+  <p id="successMsg" style="display:none;">
+    ✅ Entry received! Redirecting…
+  </p>
+</form>
+
         </article>
       </div>
     </section>
@@ -271,50 +291,106 @@
   </script>
 
   <!-- Submit handler wired to the same Netlify function / Supabase table -->
-  <script>
-    (function () {
-      const form = document.getElementById('veteran-giveaway');
-      const successMsg = document.getElementById('successMsg');
-      if (!form) return;
+<script>
+  (function () {
+    const form = document.getElementById('veteran-giveaway');
+    const successMsg = document.getElementById('successMsg');
+    const emailInput = document.getElementById('email');
+    const confirmEmailInput = document.getElementById('confirmEmail');
+    const emailError = document.getElementById('emailError');
 
-      form.addEventListener('submit', async (e) => {
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      // ---- EMAIL VALIDATION FIRST ----
+      if (emailError) emailError.textContent = '';
+
+      const email = emailInput.value.trim();
+      const confirmEmail = confirmEmailInput.value.trim();
+
+      // Basic HTML5 validity check (@, dot, etc.)
+      if (!emailInput.checkValidity() || !confirmEmailInput.checkValidity()) {
         e.preventDefault();
+        if (emailError) emailError.textContent = 'Please enter a valid email address.';
+        emailInput.focus();
+        return;
+      }
 
-        const fd = new FormData(form);
+      // Must match
+      if (email.toLowerCase() !== confirmEmail.toLowerCase()) {
+        e.preventDefault();
+        if (emailError) emailError.textContent = 'Email addresses do not match.';
+        confirmEmailInput.focus();
+        return;
+      }
+
+      // Basic domain sanity (has something after @ and at least one dot)
+      const parts = email.split('@');
+      const domain = parts[1];
+      if (!domain || !domain.includes('.')) {
+        e.preventDefault();
+        if (emailError) emailError.textContent = 'Please enter a valid email domain.';
+        emailInput.focus();
+        return;
+      }
+
+      // OPTIONAL: if you ever want to restrict to common providers,
+      // you can uncomment this block — but it will block .mil/.gov/etc.
+      /*
+      const allowedDomains = [
+        'gmail.com',
+        'yahoo.com',
+        'outlook.com',
+        'hotmail.com',
+        'icloud.com',
+        'proton.me'
+      ];
+      if (!allowedDomains.includes(domain.toLowerCase())) {
+        e.preventDefault();
+        if (emailError) {
+          emailError.textContent = 'Please use a standard email provider (Gmail, Yahoo, Outlook, etc.).';
+        }
+        return;
+      }
+      */
+
+      // ---- IF WE GET HERE, EMAIL LOOKS GOOD; SUBMIT TO NETLIFY FUNCTION ----
+      e.preventDefault();
+
+      const fd = new FormData(form);
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams([...fd.entries()])
+        });
+
+        let ok = res.ok;
+        let data = {};
 
         try {
-          const res = await fetch(form.action, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams([...fd.entries()])
-          });
-
-          let ok = res.ok;
-          let data = {};
-
-          try {
-            data = await res.json();
-            if (data && data.ok === false) ok = false;
-          } catch (_) {
-            // If the function doesn’t return JSON, just trust res.ok
-          }
-
-          if (ok) {
-  if (successMsg) successMsg.style.display = 'block';
-
-  // New: keep users on FinalSalute and use a local thank-you page
-  window.location.href = '/giveaway-thanks.html';
-} else {
-  alert('⚠️ Something went wrong. Please try again later.');
-  console.error('Error response:', data);
-}
-
-        } catch (err) {
-          alert('⚠️ Network error — please try again.');
-          console.error(err);
+          data = await res.json();
+          if (data && data.ok === false) ok = false;
+        } catch (_) {
+          // If the function doesn’t return JSON, just trust res.ok
         }
-      });
-    })();
-  </script>
+
+        if (ok) {
+          if (successMsg) successMsg.style.display = 'block';
+          window.location.href = '/giveaway-thanks.html';
+        } else {
+          alert('⚠️ Something went wrong. Please try again later.');
+          console.error('Error response:', data);
+        }
+
+      } catch (err) {
+        alert('⚠️ Network error — please try again.');
+        console.error(err);
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>
