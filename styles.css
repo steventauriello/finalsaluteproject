@@ -1,0 +1,504 @@
+/* Basic reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #090f17;
+  color: #f5f5f5;
+  line-height: 1.6;
+}
+
+/* Layout helpers */
+.container {
+  width: min(1100px, 100% - 2.5rem);
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(6, 12, 20, 0.96);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+
+.logo-main {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+}
+
+.logo-sub {
+  display: block;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.nav a {
+  margin-left: 1.25rem;
+  font-size: 1.05rem;   /* bumped up from 0.9rem */
+  font-weight: 600;     /* makes it feel stronger and more readable */
+  letter-spacing: 0.06em; /* slight spacing gives it that premium look */
+  text-decoration: none;
+  color: #e3e7ee;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.nav a:hover {
+  opacity: 1;
+}
+
+/* Hero */
+.hero {
+  padding: 4.5rem 0 3.5rem;
+  background: radial-gradient(circle at top left, #243b6b 0, #090f17 55%);
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-text h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  font-size: 1rem;
+  max-width: 40rem;
+  opacity: 0.9;
+}
+
+.hero-actions {
+  margin: 1.75rem 0 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-note {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Sections */
+.section {
+  padding: 3.5rem 0;
+}
+
+.section-alt {
+  background: #0c141e;
+}
+
+.section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.section p {
+  margin-bottom: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.3rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn.primary {
+  background: #e0b144;
+  color: #1a1205;
+  font-weight: 600;
+}
+
+.btn.primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn.secondary {
+  background: transparent;
+  color: #f5f5f5;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Steps */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.step-card {
+  background: #0c141e;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.section-alt .step-card {
+  background: #09121d;
+}
+
+.step-number {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: #e0b144;
+  color: #1a1205;
+  margin-bottom: 0.5rem;
+}
+
+/* Lists */
+.bullet-list {
+  margin: 0.5rem 0 1.25rem 1.2rem;
+}
+
+.bullet-list li {
+  margin-bottom: 0.35rem;
+}
+
+/* Special text */
+.coming-soon {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.center {
+  text-align: center;
+}
+
+.small {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #060b11;
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+}
+
+.footer-inner {
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+  .nav a {
+    margin: 0 0.75rem 0.25rem 0;
+  }
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+
+  .nav a {
+    margin: 0 0.75rem 0.25rem 0;
+  }
+}
+
+.logo a {
+  display: inline-block;
+}
+
+.logo img {
+  height: 200px;       /* tweak until it feels right */
+  width: auto;
+  display: block;
+  cursor: pointer;
+}
+/* === Final Salute Nomination Form – Visual Upgrade === */
+
+#nominate .give-card {
+  max-width: 900px;
+  margin: 2.5rem auto 0 auto;
+  padding: 2.5rem 2.75rem;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, rgba(96, 165, 250, 0.15), transparent 55%),
+              radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.15), transparent 55%),
+              rgba(9, 12, 24, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow:
+    0 24px 60px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+#nominate .give-card .disclaimer {
+  margin-bottom: 1.75rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+/* Form layout */
+
+#nominate .form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem 1.75rem;
+}
+
+#nominate .form-grid .field,
+#nominate .form-grid .field.wide {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+
+#nominate label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(209, 213, 219, 0.95);
+  margin-bottom: 0.45rem;
+}
+
+#nominate .req {
+  color: #fbbf24; /* warm accent */
+  margin-left: 0.25rem;
+}
+
+/* Inputs / selects / textareas */
+
+#nominate input[type="text"],
+#nominate input[type="email"],
+#nominate input[type="tel"],
+#nominate input:not([type]),
+#nominate select,
+#nominate textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  outline: none;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease,
+    transform 80ms ease;
+}
+
+#nominate select {
+  appearance: none;
+}
+
+/* Placeholder text */
+#nominate input::placeholder,
+#nominate textarea::placeholder {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+/* Focus state */
+
+#nominate input:focus,
+#nominate select:focus,
+#nominate textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.7),
+              0 18px 40px rgba(8, 47, 73, 0.8);
+  background-color: rgba(15, 23, 42, 1);
+  transform: translateY(-1px);
+}
+
+/* Checkbox row */
+
+#nominate .check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+#nominate .check input[type="checkbox"] {
+  margin-top: 0.15rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  accent-color: #fbbf24;
+}
+
+/* Actions / buttons */
+
+#nominate .actions {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+/* Only slightly tweak buttons inside this section so we don't mess with other pages */
+#nominate .actions .btn.primary {
+  padding-inline: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+#nominate .actions .btn.secondary.ghost {
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+/* Success message */
+
+#nominate #successMsg {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: #bbf7d0;
+}
+
+/* Responsive tweaks */
+
+@media (max-width: 640px) {
+  #nominate .give-card {
+    padding: 1.75rem 1.5rem;
+    margin-top: 2rem;
+  }
+
+  #nominate .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #nominate .actions .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+#nominate.section {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  padding-top: 4rem;
+  padding-bottom: 4.5rem;
+}
+.btn.primary {
+  background: linear-gradient(145deg, #2563eb, #1e3a8a);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.5);
+}
+#nominate .give-card {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section h2 {
+  text-shadow: 0 2px 12px rgba(30, 64, 175, 0.6);
+  letter-spacing: 0.03em;
+}
+#nominate input:focus,
+#nominate select:focus,
+#nominate textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+}
+#our-story {
+  background: #0c141e;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+#our-story h2 {
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 12px rgba(30, 64, 175, 0.6);
+}
+
+#our-story p {
+  font-size: 1rem;
+  line-height: 1.65;
+  opacity: 0.92;
+  margin-bottom: 1rem;
+  color: #f3f4f6;
+}
+html {
+  scroll-behavior: smooth;
+}
+/* Offset anchor scroll so sticky header doesn't cover section titles */
+#mission,
+#our-story,
+#how-it-works,
+#nominate,
+#contact {
+  scroll-margin-top: 170px;  /* adjust up/down if needed */
+}
