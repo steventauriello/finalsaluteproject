@@ -3,18 +3,79 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Final Salute Project | Honoring America’s Veterans with Handcrafted Keepsake Crates</title>
-  <meta name="description" content="The Final Salute Project gifts handcrafted wooden keepsake crates to recently retired U.S. veterans to honor their service and preserve their memories." />
+
+  <!-- Core SEO -->
+  <title>Final Salute Project | Keepsake Crates for U.S. Veterans</title>
+  <meta name="description" content="Final Salute Project builds and donates handcrafted wooden keepsake crates to recently retired U.S. veterans, giving them a final salute and a place to protect medals, patches, photos and service memories." />
+  <link rel="canonical" href="https://finalsaluteproject.org/" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="author" content="Final Salute Project" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Final Salute Project" />
+  <meta property="og:url" content="https://finalsaluteproject.org/" />
+  <meta property="og:title" content="Final Salute Project | Keepsake Crates for U.S. Veterans" />
+  <meta property="og:description" content="We handcraft and gift custom wooden keepsake crates to recently retired U.S. veterans — a final salute that protects their medals, patches and service stories." />
+  <meta property="og:image" content="https://finalsaluteproject.org/images/final-salute-project-main-collage.jpg" />
+  <meta property="og:image:alt" content="Collage of handcrafted military keepsake crates from the Final Salute Project for Army, Navy, Marine Corps, Air Force and Coast Guard veterans." />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Final Salute Project | Keepsake Crates for U.S. Veterans" />
+  <meta name="twitter:description" content="Handcrafted wooden keepsake crates donated to recently retired U.S. veterans — our way of saying one final, tangible 'thank you'." />
+  <meta name="twitter:image" content="https://finalsaluteproject.org/images/final-salute-project-main-collage.jpg" />
+  <meta name="twitter:image:alt" content="Final Salute Project handcrafted veteran keepsake crates collage." />
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
-  <!-- Social Share Meta -->
-  <meta property="og:title" content="The Final Salute Project – Honoring America’s Veterans" />
-  <meta property="og:description" content="We handcraft custom wooden keepsake crates for recently retired U.S. veterans — our salute for their service." />
-  <meta property="og:image" content="https://finalsaluteproject.org/favicon.png" />
-  <meta property="og:url" content="https://finalsaluteproject.org" />
-  <meta name="twitter:card" content="summary_large_image" />
-
+  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "NonprofitOrganization",
+        "@id": "https://finalsaluteproject.org/#org",
+        "name": "Final Salute Project",
+        "url": "https://finalsaluteproject.org/",
+        "description": "The Final Salute Project builds and donates handcrafted wooden keepsake crates to recently retired U.S. veterans so they have a dedicated place to store medals, patches, photos and personal service items.",
+        "logo": "https://finalsaluteproject.org/images/final-salute-project-logo.png",
+        "image": "https://finalsaluteproject.org/images/final-salute-project-main-collage.jpg",
+        "founder": {
+          "@type": "Person",
+          "name": "Steven Tauriello"
+        },
+        "sameAs": [
+          "https://freedomcrateco.com/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://finalsaluteproject.org/#website",
+        "url": "https://finalsaluteproject.org/",
+        "name": "Final Salute Project",
+        "publisher": { "@id": "https://finalsaluteproject.org/#org" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://finalsaluteproject.org/#home",
+        "url": "https://finalsaluteproject.org/",
+        "name": "Final Salute Project | Keepsake Crates for U.S. Veterans",
+        "isPartOf": { "@id": "https://finalsaluteproject.org/#website" },
+        "about": { "@id": "https://finalsaluteproject.org/#org" },
+        "description": "Learn how the Final Salute Project honors recently retired U.S. veterans by gifting handcrafted wooden keepsake crates built in partnership with Freedom Crate Co."
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -22,7 +83,7 @@
     <div class="container header-inner">
       <div class="logo">
         <a href="index.html">
-          <img src="final-salute-project-logo.png" alt="The Final Salute Project logo" />
+          <img src="images/final-salute-project-logo.png" alt="The Final Salute Project logo" />
         </a>
       </div>
 
@@ -39,7 +100,7 @@
 
   <main>
     <!-- HERO -->
-    <section class="hero">
+    <section id="home" class="hero">
       <div class="container hero-inner">
         <div class="hero-text">
           <h1>A Handcrafted Final “Thank You” for Those Who Served.</h1>
@@ -53,8 +114,7 @@
     Support the Project
   </a>
 </div>
-
-          <p class="hero-note">
+         <p class="hero-note">
             Powered in partnership with <strong>Freedom Crate Co.</strong>
           </p>
         </div>
@@ -244,14 +304,6 @@
       <textarea id="story" name="story" placeholder="Share a brief service highlight or why this veteran should be honored."></textarea>
     </div>
 
-    <div class="hero-actions">
-  <a class="btn primary" href="#nominate">Nominate a Veteran</a>
-  <a class="btn secondary" href="https://gofund.me/d8e8d9f99" target="_blank" rel="noopener">
-  Support the Project
-</a>
-
-</div>
-
   </div>
 
   <div class="actions">
@@ -267,6 +319,49 @@
         </article>
       </div>
     </section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section">
+  <div class="container">
+    <h2>Keepsake Crate Gallery</h2>
+    <p>
+      A look at our handcrafted wooden keepsake crates built for U.S. veterans across every branch of service.
+    </p>
+
+    <div class="gallery-grid">
+      <figure>
+        <img src="images/freedom-crate-army-keepsake-crate.jpg"
+             alt="U.S. Army wooden keepsake crate handcrafted for retired soldiers">
+        <figcaption>Army Keepsake Crate</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/freedom-crate-marines-keepsake-crate.jpg"
+             alt="United States Marine Corps wooden keepsake crate">
+        <figcaption>Marine Corps Keepsake Crate</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/freedom-crate-navy-keepsake-crate.jpg"
+             alt="United States Navy wooden keepsake crate">
+        <figcaption>Navy Keepsake Crate</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/freedom-crate-air-force-keepsake-crate.jpg"
+             alt="U.S. Air Force wooden keepsake crate">
+        <figcaption>Air Force Keepsake Crate</figcaption>
+      </figure>
+
+      <figure>
+        <img src="images/freedom-crate-coast-guard-keepsake-crate.jpg"
+             alt="United States Coast Guard wooden keepsake crate">
+        <figcaption>Coast Guard Keepsake Crate</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 
     <!-- CONTACT -->
     <section id="contact" class="section section-alt">
