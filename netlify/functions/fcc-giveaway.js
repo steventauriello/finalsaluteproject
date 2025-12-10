@@ -41,8 +41,8 @@ exports.handler = async (event) => {
     return respond(405, { ok:false, error:'Method Not Allowed' }, origin);
   }
 
-  const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY } = process.env;
-  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+  const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, TURNSTILE_SECRET_KEY } = process.env;
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !TURNSTILE_SECRET_KEY) {
     console.error('[fcc-giveaway] Missing env vars');
     return respond(500, { ok:false, error:'Server misconfigured' }, origin);
   }
@@ -62,6 +62,37 @@ exports.handler = async (event) => {
     return respond(400, { ok:false, error:'Invalid request body' }, origin);
   }
 
+  // ---------- Cloudflare Turnstile verification ----------
+  try {
+    const turnstileToken = String(payload['cf-turnstile-response'] || '').trim();
+
+    if (!turnstileToken) {
+      console.error('[fcc-giveaway] Missing Turnstile token');
+      return respond(400, { ok:false, error:'Human verification token missing' }, origin);
+    }
+
+    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        secret: TURNSTILE_SECRET_KEY,
+        response: turnstileToken,
+        // optional, but nice to send:
+        remoteip: (event.headers['x-forwarded-for'] || '').split(',')[0] || ''
+      })
+    });
+
+    const verifyData = await verifyRes.json().catch(() => ({}));
+    if (!verifyData.success) {
+      console.error('[fcc-giveaway] Turnstile failed:', verifyData);
+      return respond(400, { ok:false, error:'Human verification failed' }, origin);
+    }
+  } catch (err) {
+    console.error('[fcc-giveaway] Turnstile exception:', err);
+    return respond(500, { ok:false, error:'Human verification error' }, origin);
+  }
+  // ---------- end Turnstile verification ----------
+
   const email = String(payload.email || '').trim().toLowerCase();
   if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
     return respond(400, { ok:false, error:'Valid email required' }, origin);
@@ -74,17 +105,16 @@ exports.handler = async (event) => {
   const notes = notesParts.join(' | ') || null;
 
   const record = {
-  email,
-  full_name: (payload.fullName || '').toString().trim() || null,
-  phone: (payload.phone || '').toString().trim() || null,
-  branch: (payload.branch || '').toString().trim() || null,
-  is_veteran: true,
-  notes,
-  source: payload.source_site || 'freedomcrateco.com/monthly-box',
-  user_agent: event.headers['user-agent'] || null,
-  ip_addr: (event.headers['x-forwarded-for'] || '').split(',')[0] || null
-};
-
+    email,
+    full_name: (payload.fullName || '').toString().trim() || null,
+    phone: (payload.phone || '').toString().trim() || null,
+    branch: (payload.branch || '').toString().trim() || null,
+    is_veteran: true,
+    notes,
+    source: payload.source_site || 'freedomcrateco.com/monthly-box',
+    user_agent: event.headers['user-agent'] || null,
+    ip_addr: (event.headers['x-forwarded-for'] || '').split(',')[0] || null
+  };
 
   try {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/giveaway_signups`, {
@@ -110,4 +140,3 @@ exports.handler = async (event) => {
     return respond(500, { ok:false, error:'Server exception' }, origin);
   }
 };
-
