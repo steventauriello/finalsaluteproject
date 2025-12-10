@@ -315,14 +315,15 @@
     </div>
 
   <!-- Human verification (Cloudflare Turnstile) -->
-  <div class="field wide">
+ <div class="field wide">
+  <div style="min-height:70px;">
     <div
-  class="cf-turnstile"
-  data-sitekey="0x4AAAAAACFhp9YbsEvyyZ9X">
+      class="cf-turnstile"
+      data-sitekey="0x4AAAAAACFhp9YbsEvyyZ9X">
+    </div>
+  </div>
 </div>
 
-    <!-- Name/id should match what fcc-giveaway.js checks -->
-  </div>
 
   <div class="actions">
     <button class="btn primary" type="submit">Submit Nomination</button>
@@ -414,8 +415,6 @@
   </script>
 
   <!-- Submit handler wired to the same Netlify function / Supabase table -->
-
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <script>
 (function () {
@@ -517,6 +516,8 @@
   });
 })();
 </script>
- 
+
+ <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 </body>
 </html>
