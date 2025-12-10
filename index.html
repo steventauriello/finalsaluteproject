@@ -309,6 +309,17 @@
       <textarea id="story" name="story" placeholder="Share a brief service highlight or why this veteran should be honored."></textarea>
     </div>
 
+    </div>
+
+  <!-- Human verification (Cloudflare Turnstile) -->
+  <div class="field wide">
+    <div
+      class="cf-turnstile"
+      data-sitekey="0x4AAAAAACFhp9YbsEvyyZ9X"
+      data-callback="onTurnstileVerified"
+    ></div>
+    <!-- Name/id should match what fcc-giveaway.js checks -->
+    <input type="hidden" id="cf-turnstile-response" name="cf-turnstile-response">
   </div>
 
   <div class="actions">
@@ -502,7 +513,14 @@
   })();
 </script>
 
-<a href="/giveaway-thanks.html" style="display:none;">Giveaway Thanks Link</a>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script>
+  function onTurnstileVerified(token) {
+    var hidden = document.getElementById('cf-turnstile-response');
+    if (hidden) hidden.value = token;
+  }
+</script>
 
 </body>
 </html>
