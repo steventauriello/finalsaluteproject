@@ -554,5 +554,16 @@ html {
   font-weight: 600;
   color: #eee;
 }
+/* Thank-you page return link */
+.return-home {
+  color: #ffffff;
+  opacity: 0.9;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.return-home:hover {
+  opacity: 1;
+}
 
 
