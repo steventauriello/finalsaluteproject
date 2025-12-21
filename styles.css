@@ -103,7 +103,7 @@ body {
 
 .hero-image img {
   display: block;
-  max-width: 900px;     /* hard cap on desktop */
+  max-width: 520px;     /* hard cap on desktop */
   width: 100%;          /* scale down on smaller screens */
   height: auto;
   border-radius: 8px;
@@ -554,4 +554,5 @@ html {
   font-weight: 600;
   color: #eee;
 }
+
 
