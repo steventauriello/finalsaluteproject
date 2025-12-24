@@ -66,6 +66,81 @@ body {
 .nav a:hover {
   opacity: 1;
 }
+/* ===== Nav: make links feel like distinct items + add CTA ===== */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem; /* creates separation without looking bulky */
+}
+
+.nav a {
+  position: relative;
+  margin-left: 0;              /* turn off the old spacing method */
+  padding: 0.45rem 0.7rem;      /* gives “button area” so it feels clickable */
+  border-radius: 10px;
+}
+
+/* subtle divider between links (prevents “sentence” look) */
+.nav a:not(.nav-cta)::before {
+  content: "";
+  position: absolute;
+  left: -0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.14);
+}
+
+/* don’t show divider before the first link */
+.nav a:first-child::before {
+  display: none;
+}
+
+/* hover cue: faint background + underline bar */
+.nav a:not(.nav-cta):hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.nav a:not(.nav-cta)::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 6px;
+  height: 2px;
+  background: rgba(224,177,68,0.95); /* your gold */
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms ease;
+}
+
+.nav a:not(.nav-cta):hover::after {
+  transform: scaleX(1);
+}
+
+/* CTA button for Nominate */
+.nav .nav-cta {
+  background: linear-gradient(145deg, #2563eb, #1e3a8a);
+  color: #fff;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+
+.nav .nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.45);
+}
+
+/* Mobile: keep it clean */
+@media (max-width: 768px) {
+  .nav a:not(.nav-cta)::before {
+    display: none; /* dividers can get messy when wrapping */
+  }
+}
+
 
 /* Hero */
 .hero {
