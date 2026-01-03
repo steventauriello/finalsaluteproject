@@ -150,7 +150,16 @@ body {
 
 .hero-inner {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+.hero-text {
+  flex: 1 1 320px;
+  max-width: 480px;
 }
 
 .hero-text h1 {
@@ -171,18 +180,18 @@ body {
   gap: 0.75rem;
 }
 
-/* Hero collage image */
+/* Hero SVG image (right side) */
 .hero-image {
-  margin-top: 2rem;
+  flex: 1 1 320px;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-image img {
   display: block;
-  max-width: 520px;     /* hard cap on desktop */
-  width: 100%;          /* scale down on smaller screens */
+  width: 100%;
+  max-width: 520px;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -641,4 +650,111 @@ html {
   opacity: 1;
 }
 
+/* ==============================
+   Final Salute Project – Card Theme
+   (Overrides – put at very bottom)
+============================== */
+
+/* Core palette: deep black + red accents like the support card */
+body {
+  background-color: #050608;   /* almost black, like the card */
+  color: #f9fafb;
+}
+
+/* Header / nav */
+.site-header {
+  background: rgba(3, 7, 11, 0.97);
+  border-bottom: 1px solid rgba(248, 250, 252, 0.08);
+}
+
+.nav a {
+  color: #e5e7eb;
+}
+
+/* CTA (Nominate a Veteran) + primary buttons – red instead of blue */
+.nav .nav-cta,
+.btn.primary {
+  background: linear-gradient(145deg, #b91c1c, #7f1d1d); /* deep red */
+  color: #ffffff;
+  font-weight: 700;
+  border: 1px solid rgba(248, 250, 252, 0.14);
+  box-shadow: 0 6px 18px rgba(248, 113, 113, 0.35);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.nav .nav-cta:hover,
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(248, 113, 113, 0.55);
+}
+
+/* Hero – switch from blue gradient to card-style black + stripes */
+.hero {
+  position: relative;
+  padding: 4.5rem 0 3.5rem;
+  background: #050608;
+}
+
+/* Stripe bar across the top of the hero using SVG */
+.hero {
+  position: relative; /* ensure positioned parent */
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 38px; /* adjust until it visually matches your card */
+  background: url("images/fsp-hero.svg") center top no-repeat;
+  background-size: contain;  /* preserves star artwork proportions */
+  pointer-events: none;
+}
+
+/* Sections – unify to the black/charcoal card look */
+.section {
+  background: #050608;
+}
+
+.section-alt,
+#our-story {
+  background: #0b0f17;
+}
+
+.section h2,
+#our-story h2 {
+  text-shadow: 0 2px 12px rgba(185, 28, 28, 0.55); /* red glow instead of blue */
+}
+
+/* Step cards / content cards – darker, more “card-like” */
+.step-card {
+  background: #080c13;
+  border: 1px solid rgba(249, 250, 251, 0.04);
+}
+
+.section-alt .step-card {
+  background: #050a11;
+}
+
+/* Nomination section – remove blue gradient, match site */
+#nominate.section {
+  background: #050608;
+}
+
+/* Nomination card – black glassy panel instead of blue */
+#nominate .give-card {
+  background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.12), transparent 55%),
+              radial-gradient(circle at bottom right, rgba(248, 113, 113, 0.1), transparent 55%),
+              rgba(5, 7, 12, 0.98);
+  border: 1px solid rgba(249, 250, 251, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+}
+
+/* Footer – pure dark with a subtle top border */
+.site-footer {
+  background: #020308;
+  border-top: 1px solid rgba(248, 250, 252, 0.12);
+}
 
