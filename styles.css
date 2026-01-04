@@ -707,7 +707,7 @@ body {
   left: 0;
   right: 0;
 
-  height: 38px; /* adjust until it visually matches your card */
+  height: 82px; /* adjust until it visually matches your card */
   background: url("images/fsp-hero.svg") center top no-repeat;
   background-size: contain;  /* preserves star artwork proportions */
   pointer-events: none;
