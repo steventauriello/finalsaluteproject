@@ -757,4 +757,30 @@ body {
   background: #020308;
   border-top: 1px solid rgba(248, 250, 252, 0.12);
 }
+/* ==============================
+   CONTACT – Fix link visibility
+   (put at very bottom)
+============================== */
+
+#contact a {
+  color: #8fd3ff;                 /* bright readable */
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+#contact a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(143, 211, 255, 0.45);
+}
+
+#contact a:visited {
+  color: #8fd3ff;                 /* prevent “visited” from going dark */
+}
+
+#contact a:focus-visible {
+  outline: 2px solid #8fd3ff;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
 
