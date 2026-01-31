@@ -149,15 +149,15 @@
       </div>
 
       <div class="carousel-slide">
-        <img src="images/fsp-hero-army-keepsake-crate.png"
-             alt="U.S. Army keepsake crate"
-             loading="lazy">
-      </div>
+  <img src="images/fsp-hero-army-keepsake-crate.png"
+       alt="U.S. Army keepsake crate"
+       loading="eager">
+</div>
 
       <div class="carousel-slide">
         <img src="images/fsp-hero-marines-keepsake-crate.png"
              alt="U.S. Marine Corps keepsake crate"
-             loading="lazy">
+             loading="eager">
       </div>
 
       <div class="carousel-slide">
@@ -352,17 +352,20 @@
   our GiveSendGo campaign below.
 </p>
 
-<!-- GiveSendGo Embed -->
+<!-- GiveSendGo Embed (delayed load to prevent auto-scroll) -->
 <div class="donate-embed" style="max-width:900px;margin:1.5rem auto;">
-  <iframe
-  src="https://www.givesendgo.com/finalsaluteproject?embed=1"
-  width="100%"
-  height="650"
-  frameborder="0"
-  scrolling="yes"
-  style="border-radius:12px;background:#111;"
-></iframe>
-
+  <div
+    id="gsg-placeholder"
+    style="
+      height:650px;
+      border-radius:12px;
+      background:#111;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    ">
+    <p style="opacity:.85;margin:0;">Loading donation form…</p>
+  </div>
 </div>
 
 <p class="center small">
@@ -738,9 +741,31 @@
   startAuto();
 })();
 </script>
+<script>
+  (() => {
+    const ph = document.getElementById("gsg-placeholder");
+    if (!ph) return;
 
+    // Delay injection to prevent scroll hijack
+    setTimeout(() => {
+      const iframe = document.createElement("iframe");
+      iframe.src = "https://www.givesendgo.com/finalsaluteproject?embed=1";
+      iframe.width = "100%";
+      iframe.height = "650";
+      iframe.frameBorder = "0";
+      iframe.scrolling = "yes";
+      iframe.loading = "lazy";
+      iframe.tabIndex = -1;
+      iframe.style.borderRadius = "12px";
+      iframe.style.background = "#111";
 
- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+      ph.replaceWith(iframe);
+    }, 2000);
+  })();
+</script>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+
 
 </body>
 </html>

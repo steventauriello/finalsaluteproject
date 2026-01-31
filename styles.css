@@ -801,6 +801,12 @@ body {
   box-shadow: 0 12px 25px rgba(0,0,0,0.35);
 }
 
+/* Prevent Chrome/Safari scroll jump when carousel images decode/load */
+.carousel,
+.carousel * {
+  overflow-anchor: none;
+}
+
 .carousel-track {
   position: relative;
   width: 100%;
@@ -879,4 +885,9 @@ body {
 
 @media (max-width: 768px) {
   .carousel-track { height: 280px; }
+}
+/* Prevent third-party embed load from scroll-jumping the page */
+#support,
+#support * {
+  overflow-anchor: none;
 }
