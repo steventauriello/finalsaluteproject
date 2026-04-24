@@ -357,20 +357,17 @@
   our GiveSendGo campaign below.
 </p>
 
-<!-- GiveSendGo Embed -->
+<!-- GiveSendGo Lazy Load Embed -->
 <div class="donate-embed" style="max-width:900px;margin:1.5rem auto;">
   <iframe
-  src="https://www.givesendgo.com/finalsaluteproject?embed=1"
-  width="100%"
-  height="650"
-  frameborder="0"
-  scrolling="yes"
-  style="border-radius:12px;background:#111;"
-></iframe>
-
-</div>
-
-<p class="center small">
+    src="https://www.givesendgo.com/finalsaluteproject?embed=1"
+    width="100%"
+    height="650"
+    frameborder="0"
+    scrolling="yes"
+    style="border-radius:12px;background:#111;">
+  </iframe>
+</div><p class="center small">
   Prefer a full-page donation page?
   <a href="https://www.givesendgo.com/finalsaluteproject"
      target="_blank" rel="noopener">
@@ -745,6 +742,24 @@
 
 
  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+document.getElementById("loadDonationEmbed")?.addEventListener("click", function () {
+  const container = document.getElementById("donationEmbedContainer");
+
+  container.innerHTML = `
+    <iframe
+      src="https://www.givesendgo.com/finalsaluteproject?embed=1"
+      width="100%"
+      height="650"
+      frameborder="0"
+      scrolling="yes"
+      style="border-radius:12px;background:#111;">
+    </iframe>
+  `;
+
+  this.style.display = "none";
+});
+</script>
 
 </body>
 </html>
