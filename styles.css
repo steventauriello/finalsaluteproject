@@ -333,7 +333,7 @@ body {
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45),
               0 0 8px rgba(0, 0, 0, 0.25);
 }
-/* Mobile: keep it clean */
+/* Mobile: compact 2-row nav */
 @media (max-width: 768px) {
   .site-header {
     position: relative;
@@ -344,43 +344,40 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 0.45rem;
-    padding: 0.45rem 0 0.55rem;
+    padding: 0.45rem 0 0.6rem;
   }
 
   .logo img {
-    width: 76px;
-    height: 76px;
+    width: 74px;
+    height: 74px;
   }
 
   .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.35rem 0.45rem;
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    overflow: visible;
+    white-space: normal;
     margin-top: 0;
-    padding-bottom: 0.15rem;
-  }
-
-  .nav::-webkit-scrollbar {
-    display: none;
   }
 
   .nav a {
-    flex: 0 0 auto;
     margin: 0;
-    font-size: 0.88rem;
-    padding: 0.38rem 0.6rem;
+    font-size: 0.82rem;
+    line-height: 1.1;
+    padding: 0.35rem 0.45rem;
+    text-align: center;
+  }
+
+  .nav a:not(.nav-cta)::before {
+    display: none;
   }
 
   .nav .nav-cta {
-    padding: 0.5rem 0.8rem;
+    padding: 0.45rem 0.65rem;
   }
 
   .hero {
